@@ -9,13 +9,6 @@ const config_env_prod = {
   mongodb: {
     enabled: true,
     uri: process.env.MONGODB_URI || 'mongodb://supermean_user:xxxxx@5.189.161.70:27017/supermean'
-  },
-  postgres: {
-    user: 'postgres',
-    host: 'localhost',
-    database: 'testdb',
-    password: 'xxx',
-    port: 5432,
   }
 };
 

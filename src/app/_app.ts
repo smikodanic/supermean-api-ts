@@ -8,7 +8,7 @@ import Err from './middlewares/Err';
 import Logger_morgan from './middlewares/LoggerMorgan';
 import MongooseDriver from './middlewares/mongodb/MongooseDriver';
 import Request_ip from './middlewares/RequestIp';
-import Routes from './routes';
+import Routes from './routes/_routes';
 
 
 class App {
