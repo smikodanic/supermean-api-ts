@@ -38,7 +38,10 @@ module.exports = {
     }]
   },
   resolve: {
-    extensions: ['.webpack.js', '.ts', '.tsx', '.js']
+    extensions: ['.ts', '.js'],
+    alias: {
+      "src": path.resolve('./src') // for import config from 'src/app/config'; instead of import config from '../../config';
+    }
   },
   node: {
     fs: 'empty',

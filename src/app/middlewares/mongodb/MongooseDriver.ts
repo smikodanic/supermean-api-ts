@@ -16,8 +16,6 @@ const connOpts = {
   useNewUrlParser: true
 };
 
-mongoose.set('useCreateIndex', true);
-
 
 class MongooseDriver {
 
@@ -64,7 +62,6 @@ class MongooseDriver {
 
     // establish mongoose connection (use 'mongoose.connection')
     const db = mongoose.connect(dbConfig.uri, connOpts);
-    mongoose.set('useCreateIndex', true);
     // console.log(util.inspect(db));
 
     // show events
