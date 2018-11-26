@@ -3,8 +3,8 @@
  */
 import { IRequest, IResponse, INext } from 'src/app/interfaces';
 import * as jwt from 'jsonwebtoken';
-import { users_model } from '../../models';
-import config from '../../config';
+import { users_model } from 'src/app/models';
+import config from 'src/app/config';
 
 
 class Users {
