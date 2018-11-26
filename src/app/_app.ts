@@ -7,6 +7,7 @@ import Cors from './middlewares/Cors';
 import Err from './middlewares/Err';
 import Logger_morgan from './middlewares/LoggerMorgan';
 import MongooseDriver from './middlewares/mongodb/MongooseDriver';
+import RebuildIndexes from './middlewares/mongodb/RebuildIndexes';
 import Request_ip from './middlewares/RequestIp';
 import Routes from './routes/_routes';
 
@@ -45,11 +46,19 @@ class App {
   }
 
 
+  private rebuildMongoInd() {
+    if (config.env.mongodb.rebuildIndexes) {
+      RebuildIndexes.obj().allModels();
+    }
+  }
+
+
 
   run() {
     this.middlewares();
     this.routes();
     this.errors();
+    this.rebuildMongoInd();
     return this.app;
   }
 

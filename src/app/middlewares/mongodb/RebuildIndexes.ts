@@ -1,14 +1,18 @@
 import chalk from 'chalk';
+import * as mongoose from 'mongoose';
 
 
 class RebuildIndexes {
+
+  static obj() {
+    return new this();
+  }
 
   /**
    * Rebuild indexes for one model (collection)
    * @param modelName - for example: usersModel
    */
-  oneModel(modelName) {
-    'use strict';
+  oneModel(modelName: any) {
     modelName.collection.dropIndexesAsync()
       .then(() => {
         return modelName.ensureIndexesAsync()
@@ -27,35 +31,24 @@ class RebuildIndexes {
    * Rebuild indexes for all models (collections)
    */
   allModels() {
-    const mongoose = require('mongoose');
-
-    console.log(chalk.blue('NODE_RIND=true - Mongo indexes rebuild for: ', mongoose.modelNames()));
+    const msgStr = 'NODE_RIND=true - Mongo indexes rebuild for: ';
+    console.log(chalk.blue(msgStr, mongoose.modelNames().toString()));
 
     const modelsArr = mongoose.modelNames();
     /*
     [
-        'usersMD',
-        'settingsMD',
-        'plansMD',
-        'dbmoDatabasesMD',
-        'dbmoCollectionsMD',
-        'dbmoEndpointsMD',
-        'dbmoEndpointsAvailableMD',
-        'emailServersMD',
-        'emailEndpointsAvailableMD',
-        'emailEndpointsMD',
-        'authGroupsMD',
-        'authUsersMD',
-        'authEndpointsAvailableMD',
-        'authEndpointsMD'
+      'usersMD',
+      'websourcesMD',
+      ...
     ]
      */
 
     modelsArr.forEach(mdl => {
-
-      mongoose.model(mdl).collection.dropIndexesAsync()
+      // console.log(mdl);
+      const mm = mongoose.model(mdl) as any;
+      mm.collection.dropIndexesAsync()
         .then(() => {
-          return mongoose.model(mdl).ensureIndexesAsync()
+          return mm.ensureIndexesAsync()
             .catch(err => {
               throw err;
             });
@@ -63,11 +56,12 @@ class RebuildIndexes {
         .catch(err => {
           throw err;
         });
-
     });
 
-
   }
+
+
+
 
 }
 
