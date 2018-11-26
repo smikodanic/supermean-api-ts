@@ -1,9 +1,9 @@
 /**
  * /api/users/...
  */
-import { Request, Response, NextFunction } from 'express';
+import { IRequest, IResponse, INext } from 'src/app/interfaces';
 import * as jwt from 'jsonwebtoken';
-import { users as users_model } from '../../models';
+import { users_model } from '../../models';
 import config from '../../config';
 
 
@@ -26,7 +26,7 @@ class Users {
 }
    * Register slots user (admin, operator or cashier). Usually use this endpint for initial admin registration.
    */
-  register = (req: Request, res: Response, next: NextFunction) => {
+  register = (req: IRequest, res: IResponse, next: INext) => {
     const userDoc = req.body;
 
     /*** insert user into 'users' collection ***/
@@ -55,7 +55,7 @@ class Users {
 }
    * After successful login with username:password a JWT token is sent as response.
    */
-  login = (req: Request, res: Response, next: NextFunction) => {
+  login = (req: IRequest, res: IResponse, next: INext) => {
     const username = req.body.username;
     const password = req.body.password;
 
@@ -94,7 +94,7 @@ class Users {
    * Authorization: JWT xyz...
    * Get logged user data (without password). User must be logged.
    */
-  loggedinfo = (req: Request, res: Response, next: NextFunction) => {
+  loggedinfo = (req: IRequest, res: IResponse, next: INext) => {
       const username = req.user.username; // comes from /server/app/middlewares/auth/passportstrategy_jwt.js
       const queryObj = {username};
 

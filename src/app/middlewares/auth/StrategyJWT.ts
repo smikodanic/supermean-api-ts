@@ -17,7 +17,7 @@
 import * as passport from 'passport';
 import * as passportJwt from 'passport-jwt';
 import config from '../../config';
-import { users as users_model } from '../../models';
+import { users_model } from '../../models';
 
 
 const JWTStrategy = passportJwt.Strategy;

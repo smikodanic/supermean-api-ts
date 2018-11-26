@@ -1,16 +1,16 @@
 // bluebird promisification
-import * as mongoos from 'mongoose';
+import * as mongoose from 'mongoose';
 import * as BPromise from 'bluebird';
 import * as jsonpatch from 'fast-json-patch';
 import AuthLib from '../lib/AuthLib';
 
-const mongoose = BPromise.promisifyAll(mongoos);
-mongoose.Promise = BPromise; // Prevent error: "mpromise (mongoose's default promise library) is deprecated"
+const mongooseP = BPromise.promisifyAll(mongoose);
+mongooseP.Promise = BPromise; // Prevent error: "mpromise (mongoose's default promise library) is deprecated"
 const authLib = new AuthLib();
 
 // define models
 import SchemaUsers from './schema/Users';
-const usersModel = mongoose.model('usersMD', SchemaUsers);
+const usersModel = mongooseP.model('usersMD', SchemaUsers);
 
 
 
@@ -97,5 +97,5 @@ class Users extends CommonMethods {
 
 }
 
-const users = new Users();
-export { users };
+const users_model = new Users();
+export { users_model };
