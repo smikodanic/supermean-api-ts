@@ -19,30 +19,32 @@ SuperMEAN-API-Typescript is fast and lightweight API framework for NodeJS, Expre
 
 ## Installation
 ```bash
-$ git clone git@github.com:smikodanic/supermean-api-ts.git
-$ cd supermean-api-ts
+$ git clone git@github.com:smikodanic/supermean-api-ts.git <project_name>
+$ cd <project_name>
 $ rm -rf .git
+$ git init
 $ npm install
 ```
 
+or simply download **install.sh** and run ```source install.sh```
+
 
 ## Development
-Builds are done by webpack.
+Builds are done by webpack and depends on environment.
 ```bash
-$ npm run dev
+(open first terminal and run)
+$ npm run build:development
 or
-$ npm run dev-verbose (for more detailed error messages)
+$ npm run build:stage
+or
+$ npm run build:production
 
 (open another terminal and run)
-$ nodemon ./dist/server.js
-```
-Test endpoints in Postman [http://127.0.0.1:9988/](http://localhost:9988/)
-
-
-## Run Webpack Server (alternative to nodemon)
-```bash
 $ npm run serve
 ```
+
+Test endpoints in Postman [http://127.0.0.1:9988/](http://localhost:9988/)
+
 
 
 ## Ports & Environments
@@ -53,7 +55,7 @@ $ npm run serve
 ## Built-in Endpoints
 - **GET /api**  --API general info
 - **POST /api/register**  --register new user
-- **POST /api/login**  --user login
+- **POST /api/login**  --user login which returns JWT token
 - **GET /api/loggedinfo**  --logged user info
 - **GET /api/customer/test**  --customer endpoint test
 - **GET /api/admin/test**  --admin endpoint test

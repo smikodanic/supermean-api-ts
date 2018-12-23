@@ -14,7 +14,7 @@ class LoggerMorgan {
 
   logDev(app, config) {
     // log every request to the console (works only when NODE_ENV=dev)
-    if (config.env.name === 'dev') {
+    if (config.env.name === 'dev' || config.env.name === 'stage') {
       app.use(morgan('dev'));
     }
   }
