@@ -1,15 +1,10 @@
-/**
- * npm run serve
- * npm run build
- */
-
+const fs = require('fs');
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin'); // remove folders: https://github.com/johnagan/clean-webpack-plugin
 
+const nodeModules = {};
 
-var fs = require('fs');
 
-var nodeModules = {};
 
 fs.readdirSync('node_modules')
   .filter(function(x) {
@@ -19,9 +14,16 @@ fs.readdirSync('node_modules')
     nodeModules[mod] = 'commonjs ' + mod;
   });
 
+
+
 module.exports = {
   mode: 'development',
   watch: true,
+  watchOptions: {
+    aggregateTimeout: 300,
+    // poll: 1000,
+    ignored: /node_modules/
+  },
   context: path.resolve(__dirname, 'src'),
   entry: {
     server: './index.ts'
@@ -34,7 +36,7 @@ module.exports = {
     rules: [{
       test: /\.ts$/,
       use: 'ts-loader',
-      exclude: ['node_modules']
+      exclude: [/node_modules/, /dist/]
     }]
   },
   resolve: {
@@ -54,22 +56,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist'])
   ],
-  devServer: {
-    host: '127.0.0.1',
-    // host: '5.189.161.70',
-    port: 9988,
-    contentBase: path.join(__dirname, 'dist'),
-    publicPath: '/dist/', // in-memory virtual folder
-    open: false,
-    compress: true,
-    inline: true,
-    hot: false,
-    lazy: false,
-    watchContentBase: true,
-    watchOptions: {
-      aggregateTimeout: 1300, // default 300
-      poll: false,
-      ignored: ['files/**/*.js', 'node_modules']
-    }
+  optimization: {
+    nodeEnv: process.env.NODE_ENV // override mode:'development' so it will be process.env.NODE_ENV='someOtherEnvironment'
   }
 };
