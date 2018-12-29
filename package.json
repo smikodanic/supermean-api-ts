@@ -6,9 +6,10 @@
   "title": "SuperMEAN API (typescript)",
   "description": "SuperMEAN-API is API framework in NodeJS, Express and MongoDB by using typescript and webpack.",
   "scripts": {
-    "build:development": "NODE_ENV=development webpack --config webpack.config.js",
-    "build:stage": "NODE_ENV=stage webpack --config webpack.config.js",
-    "build:production": "NODE_ENV=production webpack --config webpack.config.js",
+    "build:development": "NODE_ENV=development webpack --config webpack-build.config.js",
+    "build:stage": "NODE_ENV=stage webpack --config webpack-build.config.js",
+    "build:production": "NODE_ENV=production webpack --config webpack-build.config.js",
+    "dev": "NODE_ENV=development webpack --config webpack.config.js",
     "dev-verbose": "webpack --config webpack.config.js --display-error-details",
     "serve": "nodemon ./dist/server.js"
   },
